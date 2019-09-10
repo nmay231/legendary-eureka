@@ -10,11 +10,11 @@ passport.use(
     new BearerStrategy.Strategy(async (token, done) => {
         try {
             let payload = await ValidateToken(token)
-            let [author] = await knextion('authors')
+            let [user] = await knextion('Users')
                 .where({ id: payload.userid })
                 .select<IUser[]>()
-            if (author) {
-                done(null, author)
+            if (user) {
+                done(null, user)
             } else {
                 done(null, false)
             }

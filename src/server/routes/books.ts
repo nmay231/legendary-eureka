@@ -3,8 +3,11 @@
 import { Router } from 'express'
 
 import knextion from '../db'
+import { isUser, BearerStrategy } from '../middlewares/authCheckpoints'
 
 const router = Router()
+
+router.use(BearerStrategy())
 
 router.get('/:id?', async (req, res) => {
     let id = req.params.id
