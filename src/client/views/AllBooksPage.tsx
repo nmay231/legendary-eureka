@@ -26,7 +26,7 @@ const AllBooksPage: React.FC<IAllBooksPageProps> = ({ history, match: { params }
     return (
         <>
             <h1 className="text-center my-3"> An amazing display of all books </h1>
-            <section className="row">
+            <section className="row d-flex justify-content-center">
                 {books.map((book) => (
                     <BookPreview key={book.id} book={book} />
                 ))}
