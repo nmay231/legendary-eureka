@@ -4,11 +4,14 @@ import * as React from 'react'
 import Form from '../components/commons/Form'
 import FormField from '../components/commons/FormField'
 import { RouteComponentProps } from 'react-router'
+import useLogin from '../utils/useLogin'
 
 interface ILoginPageProps extends RouteComponentProps {}
 
 const LoginPage: React.FC<ILoginPageProps> = ({ history }) => {
     const isRegistering = Boolean(history.location.pathname === '/register')
+
+    const { register, loginLocal } = useLogin()
 
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
@@ -23,11 +26,20 @@ const LoginPage: React.FC<ILoginPageProps> = ({ history }) => {
         }
     }, [history.location.pathname])
 
+    const handleLogin = () => {
+        if (isRegistering) {
+            register(name, email, password)
+        } else {
+            loginLocal(email, password)
+        }
+        history.push('/books')
+    }
+
     return (
         <section className="row d-flex">
             <div className="col-6 mx-auto">
                 <Form
-                    submit={() => {}}
+                    submit={handleLogin}
                     submitText="Login"
                     className="card border rounded-lg p-4 shadow mt-5"
                 >

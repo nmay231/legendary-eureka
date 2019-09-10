@@ -8,7 +8,7 @@ import { LoginProvider } from './components/context/LoginContext'
 import HomePage from './views/HomePage'
 import LoginPage from './views/LoginPage'
 import EditBookPage from './views/EditBookPage'
-// import HomePage from './views/HomePage'
+import AllBooksPage from './views/AllBooksPage'
 // import HomePage from './views/HomePage'
 
 import Navigation from './components/standalone/Navigation'
@@ -23,7 +23,7 @@ const App: React.FC = () => {
                         <Route exact path="/" component={HomePage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={LoginPage} />
-                        <Route exact path="/books" component={() => <div>all books</div>} />
+                        <Route exact path="/books" component={AllBooksPage} />
                         <Route path="/books/new" component={EditBookPage} />
                     </Switch>
                 </main>

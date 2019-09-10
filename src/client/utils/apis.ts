@@ -4,8 +4,9 @@ import * as path from 'path'
 import Axios from 'axios'
 import { Method } from 'axios'
 
-export const BOOKSTORE_API = '/api/bookstore'
-export const USERS_API = '/api/users'
+export const BOOKS_API = '/api/books'
+export const CATEGORIES_API = '/api/categories'
+// export const USERS_API = '/api/users'
 
 export const LOGIN_ENDPOINT = '/auth/login'
 export const REGISTER_ENDPOINT = '/auth/register'
