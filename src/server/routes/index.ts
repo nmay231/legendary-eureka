@@ -1,11 +1,21 @@
 /** @format */
 
-import * as express from 'express'
+import { Router } from 'express'
 
-const router = express.Router()
+import CategoriesAPI from './categories'
+import BooksAPI from './books'
 
-router.get('/api/hello', (req, res, next) => {
-    res.json('World')
-})
+import LoginAuth from './login'
+import RegisterAuth from './register'
+
+const router = Router()
+
+router.get('/hello', (req, res) => res.json('yellow'))
+
+router.use('/api/categories', CategoriesAPI)
+router.use('/api/books', BooksAPI)
+
+router.use('/auth/login', LoginAuth)
+router.use('/auth/register', RegisterAuth)
 
 export default router
