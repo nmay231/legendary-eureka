@@ -12,8 +12,10 @@ const router = Router()
 
 router.use('/api/categories', CategoriesAPI)
 router.use('/api/books', BooksAPI)
+router.use('/api', (req, res) => res.sendStatus(404))
 
 router.use('/auth/login', LoginAuth)
 router.use('/auth/register', RegisterAuth)
+router.use('/auth', (req, res) => res.sendStatus(404))
 
 export default router
