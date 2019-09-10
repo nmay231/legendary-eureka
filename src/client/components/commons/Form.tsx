@@ -25,7 +25,7 @@ const Form: React.FC<IFormProps> = ({
     }
 
     if (!className) {
-        className = 'card border rounded-lg shadow'
+        className = 'card border rounded-lg p-4 shadow'
     }
 
     const handleSubmit: React.FormEventHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,8 +40,8 @@ const Form: React.FC<IFormProps> = ({
 
     return (
         <form onSubmit={handleSubmit} className={className}>
-            <div className="d-flex justify-content-around">
-                {children}
+            {children}
+            <div className="d-flex justify-content-around mt-2">
                 <button role="submit" className="btn btn-primary">
                     {submitText}
                 </button>
