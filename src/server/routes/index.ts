@@ -10,8 +10,6 @@ import RegisterAuth from './register'
 
 const router = Router()
 
-router.get('/hello', (req, res) => res.json('yellow'))
-
 router.use('/api/categories', CategoriesAPI)
 router.use('/api/books', BooksAPI)
 
