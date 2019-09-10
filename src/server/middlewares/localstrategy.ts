@@ -19,7 +19,7 @@ passport.use(
                 }
                 let [user] = await knextion('authors')
                     .where({ email })
-                    .select<IAuthor[]>()
+                    .select<IUser[]>()
                 if (user && ComparePassword(password, user.hash)) {
                     return done(null, user)
                 } else {

@@ -12,7 +12,7 @@ passport.use(
             let payload = await ValidateToken(token)
             let [author] = await knextion('authors')
                 .where({ id: payload.userid })
-                .select<IAuthor[]>()
+                .select<IUser[]>()
             if (author) {
                 done(null, author)
             } else {
