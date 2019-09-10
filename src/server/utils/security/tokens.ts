@@ -5,10 +5,10 @@ import * as jwt from 'jsonwebtoken'
 import * as moment from 'moment'
 
 import knextion from '../../db'
-// tokens(id, authorid, token, expires, _created)
+// tokens(id, userid, token, expires, _created)
 
 export const CreateToken = async (payload: IPayload) => {
-    let [tokenid] = await knextion('tokens').insert<number[]>({ authorid: payload.authorid })
+    let [tokenid] = await knextion('tokens').insert<number[]>({ userid: payload.userid })
     payload.tokenid = tokenid
     payload.unique = crypto.randomBytes(32).toString('hex')
     payload.expires = moment(Date.now())
@@ -17,13 +17,13 @@ export const CreateToken = async (payload: IPayload) => {
     let token = await jwt.sign(payload, process.env.AUTH_SECRET)
     await knextion('tokens')
         .update({ token, expires: payload.expires })
-        .where({ authorid: payload.authorid })
+        .where({ userid: payload.userid })
     return token
 }
 
-export const RecoverToken = async (authorid: number) => {
+export const RecoverToken = async (userid: number) => {
     let [tokenRow] = await knextion('tokens')
-        .where({ authorid })
+        .where({ userid })
         .select<{ token: string; expires: Date }[]>()
     let payload: IPayload
 
@@ -40,7 +40,7 @@ export const RecoverToken = async (authorid: number) => {
         let token = await jwt.sign(payload, process.env.AUTH_SECRET)
         await knextion('tokens')
             .update({ token, expires: payload.expires })
-            .where({ authorid })
+            .where({ userid })
         return token
     }
 }

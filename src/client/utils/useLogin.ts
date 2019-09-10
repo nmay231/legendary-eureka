@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Axios from 'axios'
 import { Method } from 'axios'
+
 import { LoginContext } from '../components/context/LoginContext'
 import { LOGIN_ENDPOINT, REGISTER_ENDPOINT, unauthedJson } from './apis'
 
@@ -10,7 +11,7 @@ const useLogin = () => {
     const [user, setUser] = React.useContext(LoginContext)
 
     const logout = () => {
-        setUser({ authorid: -1, token: undefined, role: undefined })
+        setUser({ userid: -1, token: undefined, role: undefined })
         localStorage.removeItem('user')
     }
 
@@ -42,7 +43,7 @@ const useLogin = () => {
             setUser(user)
             return true
         } else {
-            setUser({ authorid: -1, token: undefined, role: undefined })
+            setUser({ userid: -1, token: undefined, role: undefined })
             return false
         }
     }
@@ -70,7 +71,7 @@ const useLogin = () => {
 
         isLoggedIn: Boolean(user.role && user.token),
         isAdmin: Boolean(user.role === 'admin'),
-        isUser: (authorid: number) => user.authorid === authorid,
+        isUser: (userid: number) => user.userid === userid,
     }
 }
 
