@@ -2,18 +2,26 @@
 
 import * as React from 'react'
 import BookPreview from '../components/commons/BookPreview'
-import { unauthedJson, BOOKS_API } from '../utils/apis'
+import { unauthedJson, BOOKS_API, join } from '../utils/apis'
+import { RouteComponentProps } from 'react-router'
 
-interface IAllBooksPageProps {}
+interface IAllBooksPageProps extends RouteComponentProps<{ id: string }> {}
 
-const AllBooksPage: React.FC<IAllBooksPageProps> = () => {
+const AllBooksPage: React.FC<IAllBooksPageProps> = ({ history, match: { params } }) => {
     const [books, setBooks] = React.useState<IBook[]>([])
 
     React.useEffect(() => {
-        ;(async () => {
-            setBooks(await unauthedJson<IBook[]>(BOOKS_API))
-        })()
-    }, [])
+        let showAll = history.location.pathname === '/books'
+        if (showAll) {
+            ;(async () => {
+                setBooks(await unauthedJson<IBook[]>(BOOKS_API))
+            })()
+        } else {
+            ;(async () => {
+                setBooks([await unauthedJson<IBook>(join(BOOKS_API, `${params.id}`))])
+            })()
+        }
+    }, [history.location.pathname])
 
     return (
         <>

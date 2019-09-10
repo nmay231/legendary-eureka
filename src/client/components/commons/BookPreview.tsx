@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { unauthedJson, BOOKS_API, join, CATEGORIES_API } from '../../utils/apis'
+import { Link } from 'react-router-dom'
 
 interface IBookPreviewProps {
     book: IBook
@@ -24,6 +25,8 @@ const BookPreview: React.FC<IBookPreviewProps> = ({ book }) => {
                     {title} written by {author}
                 </h3>
                 <p className="card-text">Price: ${price}</p>
+                <p className="card-text">{category}</p>
+                <Link to={`/books/${id}`}>View just me!</Link>
             </article>
         </div>
     )

@@ -24,7 +24,8 @@ const App: React.FC = () => {
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={LoginPage} />
                         <Route exact path="/books" component={AllBooksPage} />
-                        <Route path="/books/new" component={EditBookPage} />
+                        <Route exact path="/books/new" component={EditBookPage} />
+                        <Route path="/books/:id" component={AllBooksPage} />
                     </Switch>
                 </main>
             </Router>
