@@ -1,38 +1,35 @@
 /** @format */
 
 import * as React from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
-class App extends React.Component<IAppProps, IAppState> {
-    constructor(props: IAppProps) {
-        super(props)
-        this.state = {
-            name: null,
-        }
-    }
+import { LoginProvider } from './components/context/LoginContext'
 
-    async componentWillMount() {
-        try {
-            let r = await fetch('/api/hello')
-            let name = await r.json()
-            this.setState({ name })
-        } catch (error) {
-            console.log(error)
-        }
-    }
+import HomePage from './views/HomePage'
+import LoginPage from './views/LoginPage'
+import EditBookPage from './views/EditBookPage'
+// import HomePage from './views/HomePage'
+// import HomePage from './views/HomePage'
 
-    render() {
-        return (
-            <main className="container my-5">
-                <h1 className="text-primary text-center">Hello {this.state.name}!</h1>
-            </main>
-        )
-    }
-}
+import Navigation from './components/standalone/Navigation'
 
-export interface IAppProps {}
-
-export interface IAppState {
-    name: string
+const App: React.FC = () => {
+    return (
+        <LoginProvider>
+            <Router>
+                <Navigation />
+                <main className="container">
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/login" component={LoginPage} />
+                        <Route path="/register" component={LoginPage} />
+                        <Route exact path="/books" component={() => <div>all books</div>} />
+                        <Route path="/books/new" component={EditBookPage} />
+                    </Switch>
+                </main>
+            </Router>
+        </LoginProvider>
+    )
 }
 
 export default App
